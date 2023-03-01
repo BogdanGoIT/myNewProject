@@ -8,7 +8,10 @@ export default function App() {
         style={styles.image}
         source={require("./assets/images/stars-on-night.jpg")}
       >
+      <View style={styles.form}>
         <TextInput style={styles.input} textAlign={'center'}/>
+      </View>
+        
       </ImageBackground>
     </View>
   );
