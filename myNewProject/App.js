@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from "react-native";
 
 export default function App() {
   return (
@@ -17,7 +17,9 @@ export default function App() {
           <Text style={styles.inputTitle}>PASSWORD</Text>
           <TextInput style={styles.input} textAlign={'center'} secureTextEntry={true}/>
         </View>
-        <Button title="SIGN IN"/>
+        <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+          <Text style={styles.btnTitle}>SIGN IN</Text>
+        </TouchableOpacity>
       </View>
         
       </ImageBackground>
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     // alignItems: "center",
   },
   input: {
@@ -51,4 +53,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 18,
   },
+  btn: {
+    backgroundColor: "#ffb6c1",
+    height: 40,
+    marginTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 6,
+    marginHorizontal: 20,
+  },
+  btnTitle: {
+    color: '#fff',
+    fontSize: 18,
+  }
 });
