@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, Platform } from "react-native";
 
 export default function App() {
+  console.log(Platform.OS)
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -54,7 +55,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   btn: {
-    backgroundColor: "#ffb6c1",
+    backgroundColor: Platform.OS !== 'ios' ?   "#4169e1" : "transparent",
+    borderWidth: 1,
+    borderColor: Platform.OS !== 'ios' ? "transparent" : '#f0f8ff' ,
     height: 40,
     marginTop: 40,
     justifyContent: "center",
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   btnTitle: {
-    color: '#fff',
+    color: Platform.OS !== 'ios' ? "#f0f8ff" : '#4169e1',
     fontSize: 18,
   }
 });
