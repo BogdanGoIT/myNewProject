@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js</Text>
-      <StatusBar style="auto" />
+      <View style={styles.innerBox}>
+        <Text style={styles.text}>Hurd work:)</Text>
+      </View>
     </View>
   );
 }
@@ -17,4 +17,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: "green", 
+    fontSize: 30,
+  },
+  innerBox: {
+    borderWidth: 1,
+    borderColor: "red",
+    padding: 40,
+    borderRadius: 10,
+    width: 300,
+  }
 });
