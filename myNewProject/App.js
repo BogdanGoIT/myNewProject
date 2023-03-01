@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, TextInput } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from "react-native";
 
 export default function App() {
   return (
@@ -9,7 +9,15 @@ export default function App() {
         source={require("./assets/images/stars-on-night.jpg")}
       >
       <View style={styles.form}>
-        <TextInput style={styles.input} textAlign={'center'}/>
+        <View>
+          <Text style={styles.inputTitle}>EMAIL ADDRESS</Text>
+          <TextInput style={styles.input} textAlign={'center'}/>
+        </View>
+        <View style={{marginTop: 20}}>
+          <Text style={styles.inputTitle}>PASSWORD</Text>
+          <TextInput style={styles.input} textAlign={'center'} secureTextEntry={true}/>
+        </View>
+        <Button title="SIGN IN"/>
       </View>
         
       </ImageBackground>
@@ -31,9 +39,16 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#f0f8ff',
-    marginHorizontal: 40,
     borderRadius: 6,
     height: 40,
     color: '#f0f8ff',
-  }
+  },
+  form: {
+    marginHorizontal: 40,
+  },
+  inputTitle: {
+    color: '#f0f8ff',
+    marginBottom: 10,
+    fontSize: 18,
+  },
 });
