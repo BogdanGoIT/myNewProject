@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,13 +12,21 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+const intialState = {
+  email: '',
+  password: '',
+}
+let a = 0;
 export default function App() {
-  console.log(Platform.OS);
+  console.log(Platform.OS, `обновилcя поля - ${a+=1}`);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [state, setState] = useState(intialState);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    console.log(state);
+    setState(intialState);
   };
 
   return (
@@ -47,6 +55,8 @@ export default function App() {
                   style={styles.input}
                   textAlign={"center"}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
+                  onChangeText={(value)=>setState( (prevState)=> ({...prevState, email: value}) )}
                 />
               </View>
               <View style={{ marginTop: 20 }}>
@@ -56,6 +66,8 @@ export default function App() {
                   textAlign={"center"}
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
+                  onChangeText={(value)=>setState( (prevState)=>({...prevState, password: value}) )}
                 />
               </View>
               <TouchableOpacity
