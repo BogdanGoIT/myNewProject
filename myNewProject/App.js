@@ -8,11 +8,17 @@ import {
   TouchableOpacity,
   Platform,
   KeyboardAvoidingView,
+  Keyboard,
 } from "react-native";
 
 export default function App() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.container}>
@@ -43,7 +49,11 @@ export default function App() {
                 onFocus={() => setIsShowKeyboard(true)}
               />
             </View>
-            <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.btn}
+              onPress={keyboardHide}
+            >
               <Text style={styles.btnTitle}>SIGN IN</Text>
             </TouchableOpacity>
           </View>
