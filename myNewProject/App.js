@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, Platform } from "react-native";
 
 export default function App() {
-  console.log(Platform.OS)
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     // alignItems: "center",
   },
   input: {
@@ -55,18 +54,29 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   btn: {
-    backgroundColor: Platform.OS !== 'ios' ?   "#4169e1" : "transparent",
-    borderWidth: 1,
-    borderColor: Platform.OS !== 'ios' ? "transparent" : '#f0f8ff' ,
     height: 40,
     marginTop: 40,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 6,
     marginHorizontal: 20,
+    borderWidth: 1,
+
+    ...Platform.select({
+      ios: {
+        backgroundColor: "transparent",
+        borderColor: "#f0f8ff",
+      },
+      android: {
+        backgroundColor: "#4169e1",
+        borderColor: "transparent",
+      },
+    })
+
+
   },
   btnTitle: {
-    color: Platform.OS !== 'ios' ? "#f0f8ff" : '#4169e1',
+    color: Platform.OS === 'ios' ? '#4169e1' : "#f0f8ff",
     fontSize: 18,
   }
 });
