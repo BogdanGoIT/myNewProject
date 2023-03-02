@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 
 import {
   StyleSheet,
@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 
 import { useFonts } from 'expo-font';
@@ -28,6 +29,20 @@ export default function App() {
   // console.log(Platform.OS, `обновился поля - ${a+=1}`);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(intialState);
+  
+  const dimensionCalc = () => Dimensions.get("window").width - 20 * 2;
+  const [dimensions, setDimensions] = useState(dimensionCalc);
+  
+  useEffect(()=>{
+    const onChange = () => {
+      const width = dimensionCalc;
+      setDimensions(width)
+    };
+    Dimensions.addEventListener("change", onChange);
+    return ()=>{
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, [])
 
   const [fontsLoaded] = useFonts({
     'DMMono-Regular': require('./assets/fonts/DMMono-Regular.ttf'),
@@ -64,6 +79,7 @@ export default function App() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? 20 : 150,
+                width: dimensions,
               }}
             >
               <View style={styles.header} >
@@ -116,7 +132,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
     // justifyContent: "center",
-    // alignItems: "center",
+    alignItems: "center",
   },
   input: {
     borderWidth: 1,
@@ -127,7 +143,7 @@ const styles = StyleSheet.create({
     color: "#f0f8ff",
   },
   form: {
-    marginHorizontal: 40,
+    // marginHorizontal: 40,
   },
   inputTitle: {
     color: "#f0f8ff",
@@ -160,7 +176,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: "center",
-    marginBottom: 150,
+    marginBottom: 120,
   },
   headerTitle: {
     fontSize: 30,
