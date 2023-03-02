@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react"
+
 import {
   StyleSheet,
   Text,
@@ -12,15 +13,35 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+import { useFonts } from 'expo-font';
+import * as SplashScreen from "expo-splash-screen";
+SplashScreen.preventAutoHideAsync();
+
 const intialState = {
   email: '',
   password: '',
 }
+
 let a = 0;
+
 export default function App() {
-  console.log(Platform.OS, `обновилcя поля - ${a+=1}`);
+  // console.log(Platform.OS, `обновился поля - ${a+=1}`);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(intialState);
+
+  const [fontsLoaded] = useFonts({
+    'DMMono-Regular': require('./assets/fonts/DMMono-Regular.ttf'),
+  });
+  
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -30,8 +51,8 @@ export default function App() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
-      <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={keyboardHide} onLayout={onLayoutRootView}>
+      <View style={styles.container} >
         <ImageBackground
           style={styles.image}
           source={require("./assets/images/stars-on-night.jpg")}
@@ -45,7 +66,7 @@ export default function App() {
                 marginBottom: isShowKeyboard ? 20 : 150,
               }}
             >
-              <View style={styles.header}>
+              <View style={styles.header} >
                 <Text style={styles.headerTitle}>Hello again</Text>
                 <Text style={styles.headerTitle}>Welcome back</Text>
               </View>
@@ -112,6 +133,7 @@ const styles = StyleSheet.create({
     color: "#f0f8ff",
     marginBottom: 10,
     fontSize: 18,
+    fontFamily: 'DMMono-Regular',
   },
   btn: {
     borderRadius: 6,
@@ -143,5 +165,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 30,
     color: "#f0f8ff",
+    fontFamily: 'DMMono-Regular',
   },
 });
